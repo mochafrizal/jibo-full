@@ -147,28 +147,8 @@ const Navbar = () => {
                             </li>
                         ))}
 
-                        {/* Tombol Logout */}
-                        {!user && !admin && (
-                            <li className="flex items-center gap-3 px-4 py-3 border-b">
-                                <img
-                                    src={avatarImg}
-                                    alt="User Avatar"
-                                    className="w-8 h-8 rounded-full border-2 border-indigo-600"
-                                />
-                                <button
-                                    onClick={() => {
-                                        // handleLogout();
-                                        setIsMobileMenuOpen(false);
-                                    }}
-                                    className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md shadow-md transition duration-200 flex items-center gap-2"
-                                >
-                                    <HiOutlineLogout className="text-3xl" /> Logout
-                                </button>
-                            </li>
-                        )}
-
                         {/* Tombol Login */}
-                        {user && (
+                        {!user && !admin && (
                             <li className="border-b">
                                 <NavLink
                                     to="/login"
@@ -193,6 +173,26 @@ const Navbar = () => {
                                         <MdOutlineAddchart className="text-3xl" /> Dashboard
                                     </button>
                                 </Link>
+                            </li>
+                        )}
+
+                        {/* Tombol Logout (User) */}
+                        {user && !admin && (
+                            <li className="flex items-center gap-3 px-4 py-3 border-b">
+                                <img
+                                    src={avatarImg}
+                                    alt="User Avatar"
+                                    className="w-8 h-8 rounded-full border-2 border-indigo-600"
+                                />
+                                <button
+                                    onClick={() => {
+                                        handleLogout();
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md shadow-md transition duration-200 flex items-center gap-2"
+                                >
+                                    <HiOutlineLogout className="text-3xl" /> Logout
+                                </button>
                             </li>
                         )}
                     </ul>
