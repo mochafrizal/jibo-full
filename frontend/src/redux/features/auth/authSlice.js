@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const isTokenPresentInCookies = () => {
+    const token = document.cookie.split(';').find(cookie => cookie.trim().startsWith('token='));
+    return !!token;
+};
 // Fungsi untuk menyimpan token di cookie
 const setCookie = (name, value, days) => {
     const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
@@ -16,8 +20,7 @@ const getCookie = (name) => {
 const loadUserFromLocalStorage = () => {
     try {
         const serializedState = localStorage.getItem("auth");
-        const token = getCookie('token'); // Validasi token dari cookie
-        if (!serializedState || !token) return { user: null, admin: null };
+        if (!serializedState) return { user: null, admin: null };
         return JSON.parse(serializedState);
     } catch {
         return { user: null, admin: null };
@@ -26,52 +29,27 @@ const loadUserFromLocalStorage = () => {
 
 const initialState = loadUserFromLocalStorage();
 
-// const authSlice = createSlice({
-//     name: "auth",
-//     initialState,
-//     reducers: {
-//         setUser(state, action) {
-//             state.user = action.payload.user;
-//             state.admin = null;
-//             localStorage.setItem("auth", JSON.stringify(state));
-//             setCookie('token', action.payload.token, 7); // Simpan token
-//         },
-//         setAdmin(state, action) {
-//             state.admin = action.payload.admin;
-//             state.user = null;
-//             localStorage.setItem("auth", JSON.stringify(state));
-//             setCookie('token', action.payload.token, 7); // Simpan token
-//         },
-//         logout(state) {
-//             state.user = null;
-//             state.admin = null;
-//             localStorage.removeItem("auth");
-//             document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Hapus token
-//         },
-//     },
-// });
-
 const authSlice = createSlice({
     name: "auth",
-    initialState: {
-        user: null,
-        token: null,
-    },
+    initialState,
     reducers: {
-        setAuth: (state, action) => {
+        setUser(state, action) {
             state.user = action.payload.user;
-            state.token = action.payload.token;
+            state.admin = null;
+            localStorage.setItem("auth", JSON.stringify(state));
         },
-
-        logout: (state) => {
+        setAdmin(state, action) {
+            state.admin = action.payload.admin;
             state.user = null;
-            state.token = null;
+            localStorage.setItem("auth", JSON.stringify(state));
+        },
+        logout(state) {
+            state.user = null;
+            state.admin = null;
+            localStorage.removeItem("auth");
         },
     },
 });
 
-export const { setAuth, logout } = authSlice.actions;
+export const { setUser, setAdmin, logout } = authSlice.actions;
 export default authSlice.reducer;
-
-// export const { setUser, setAdmin, logout } = authSlice.actions;
-// export default authSlice.reducer;

@@ -7,6 +7,7 @@ import postRouter from './routes/postRoutes.js';
 import productRouter from './routes/productRoutes.js';
 import { connect } from './library/db.js';
 import { errorHandler } from './middleeware/errorHandler.js';
+import logoutRouter from './routes/logoutRouter.js';
 
 // Membuat aplikasi Express
 const app = express();
@@ -15,7 +16,7 @@ const port = process.env.PORT || 3000;
 // Middleware CORS
 app.use(cors({
     origin: 'http://localhost:5173', // URL frontend Anda
-    credentials: true, // Memungkinkan pengiriman cookie lintas asal
+    credentials: true, //pengiriman cookie lintas asal
 }));
 
 // Middleware parsing request body
@@ -28,6 +29,7 @@ app.use('/user', userRouter);
 app.use('/auth', loginRouter);
 app.use('/posts', postRouter);
 app.use('/product', productRouter);
+app.use('/logout', logoutRouter);
 
 // Global error handler
 app.use(errorHandler);

@@ -16,6 +16,17 @@ const baseApi = createApi({
             }),
         }),
 
+        // Logout
+        logout: builder.mutation({
+            query: () => ({
+                url: '/logout',
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // ambil token dari localStorage
+                },
+            }),
+        }),
+
         // Admin endpoints
         getAdmins: builder.query({
             query: () => '/admin',
@@ -76,6 +87,7 @@ const baseApi = createApi({
 
 export const {
     useLoginMutation,
+    useLogoutMutation, // Tambahkan hook untuk logout
     useGetAdminsQuery,
     useGetAdminQuery,
     useCreateAdminMutation,

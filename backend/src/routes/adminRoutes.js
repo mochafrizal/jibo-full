@@ -9,7 +9,7 @@ import {
     deleteAdmin,
     getAdmin,
     getAdmins,
-    updateAdmin
+    updateAdmin,
 } from "../controller/adminController.js";
 
 const adminRouter = Router();

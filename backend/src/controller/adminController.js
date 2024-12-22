@@ -13,9 +13,9 @@ export const getAdmins = async (req, res) => {
 export const getAdmin = async (req, res) => {
     try {
         const admin = await Admin.findById(req.params.id);
-        if(!admin){
-           return res.status(404).json({ error: 'Admin tidak ditemukan' });
-        }else{
+        if (!admin) {
+            return res.status(404).json({ error: 'Admin tidak ditemukan' });
+        } else {
             return res.status(200).json({ admin })
         }
     } catch (error) {
@@ -24,32 +24,32 @@ export const getAdmin = async (req, res) => {
 }
 
 export const createAdmin = async (req, res) => {
-    const {name, email, password} = req.body;
+    const { name, email, password } = req.body;
 
-    if(!name || !email || !password){
+    if (!name || !email || !password) {
         return res.status(400).json({
             error: "inputan harus lengkap"
         })
     }
     try {
-        const newAdmin = new Admin({name, email, password})
+        const newAdmin = new Admin({ name, email, password })
         const addAdmin = await newAdmin.save()
         return res.status(200).json(addAdmin)
     } catch (error) {
         return res.status(400).json({
-            error : "Terjadi kesalahan saat input data",
+            error: "Terjadi kesalahan saat input data",
             detail: error.message
         })
     }
 }
 
-export const updateAdmin = async (req,res) => {
+export const updateAdmin = async (req, res) => {
     const { id } = req.params;
-    const { name, email, password} = req.body;
- 
+    const { name, email, password } = req.body;
+
     try {
         const updAdmin = await Admin.findOneAndUpdate(
-            { _id: id},
+            { _id: id },
             { name, email, password },
             { new: true }
         );
@@ -62,10 +62,9 @@ export const updateAdmin = async (req,res) => {
 export const deleteAdmin = async (req, res) => {
     const { id } = req.params;
     try {
-        const delAdmin = await Admin.findByIdAndDelete({_id: id})
+        const delAdmin = await Admin.findByIdAndDelete({ _id: id })
         return res.status(200).json({ message: "berhasil menghapus data", delAdmin })
     } catch (error) {
         next(error)
     }
 }
-

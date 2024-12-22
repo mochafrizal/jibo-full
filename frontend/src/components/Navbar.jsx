@@ -4,8 +4,8 @@ import { RiMenu4Fill } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from 'react-redux';
 import avatarImg from '../assets/commentor.png';
-// import { useLogoutUserMutation } from '../redux/features/auth/authApi';
-// import { logout } from '../redux/features/auth/authSlice';
+import { useLogoutMutation } from '../redux/features/auth/authApi';
+import { logout } from '../redux/features/auth/authSlice';
 import { HiOutlineLogin, HiOutlineLogout } from "react-icons/hi";
 import { MdOutlineAddchart } from "react-icons/md";
 import logoImg from "../../src/assets/jibo-logo.png"
@@ -22,19 +22,31 @@ const Navbar = () => {
     const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
     const { user, admin } = useSelector((state) => state.auth)
     const dispatch = useDispatch();
-    // const [logoutUser] = useLogoutUserMutation();
+    const [logoutUser] = useLogoutMutation();
 
     const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
     const toggleDesktopMenu = () => setIsDesktopMenuOpen(!isDesktopMenuOpen);
 
-    // const handleLogout = async () => {
-    //     try {
-    //         await logoutUser().unwrap();
-    //         dispatch(logout());
-    //     } catch (error) {
-    //         console.error("Logout failed", error);
-    //     }
-    // };
+    const handleLogout = async () => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            console.error("Token tidak ditemukan di localStorage");
+            return;
+        }
+
+        try {
+            await logoutUser().unwrap();  // Memanggil API logout
+            localStorage.removeItem("token");  // Menghapus token dari localStorage
+            localStorage.removeItem("auth");  // Menghapus data autentikasi lain jika ada
+            dispatch(logout());  // Menghapus state autentikasi dari Redux
+
+            // Redirect atau logika lain setelah logout
+        } catch (error) {
+            console.error("Logout gagal:", error);
+        }
+    };
+
 
     return (
         <header className="md:py-2 md:h-16 sm:h-10 m-2">
@@ -63,7 +75,7 @@ const Navbar = () => {
                     )}
                     {user && (
                         <button
-                            // onClick={handleLogout}
+                            onClick={handleLogout}
                             title="Logout"
                             className="bg-transparent hover:text-red-600 text-white py-2 px-4 rounded-md shadow-md transition duration-200 flex items-center gap-2 "
                         >

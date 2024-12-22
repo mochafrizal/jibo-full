@@ -50,8 +50,9 @@ const router = createBrowserRouter([
                 element: <Register />
             },
             {
+                // its will be protected by the admin : use private routes 
                 path: "/dashboard",
-                element: <PrivateRouter> <AdminLayout /> </PrivateRouter>, // its will be protected by the admin : use private routes 
+                element: <PrivateRouter> <AdminLayout /> </PrivateRouter>,
                 children: [
                     {
                         path: "",

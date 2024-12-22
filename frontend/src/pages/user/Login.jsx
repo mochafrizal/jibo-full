@@ -1,9 +1,19 @@
-/* eslint-disable react/no-unescaped-entities */
 import React, { useState, useEffect, useRef } from 'react';
 import { useLoginMutation } from '../../redux/features/auth/authApi'; // Gunakan endpoint login baru
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser, setAdmin } from '../../redux/features/auth/authSlice'; // Tambahkan setAdmin untuk admin
+
+// Fungsi untuk menyimpan token di cookie
+const setCookie = (name, value, days) => {
+    const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
+    document.cookie = `${name}=${value}; expires=${expires}; path=/; Secure; SameSite=Strict`;
+};
+
+// Fungsi untuk menyimpan token di localStorage
+const setLocalStorage = (name, value) => {
+    localStorage.setItem(name, value);
+};
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -16,54 +26,37 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    // const handleLogin = async (e) => {
-    //     e.preventDefault();
-    //     const data = {
-    //         email,
-    //         password,
-    //     };
-
-    //     try {
-    //         const response = await login(data).unwrap(); // Gunakan endpoint login baru
-    //         console.log("AKUN", response);
-
-    //         // Cek apakah yang login adalah admin atau user
-    //         const { token, admin, user } = response;
-
-    //         if (admin) {
-    //             dispatch(setAdmin({ admin })); // Set state untuk admin
-    //         } else if (user) {
-    //             dispatch(setUser({ user })); // Set state untuk user
-    //         }
-
-    //         alert('Login successful');
-    //         navigate('/dashboard'); // Arahkan ke halaman utama setelah login
-    //     } catch (err) {
-    //         console.error(err);
-    //         setMessage("Invalid email or password. Please try again.");
-    //     }
-    // };
-
     const handleLogin = async (e) => {
         e.preventDefault();
-        const data = { email, password };
+        const data = {
+            email,
+            password,
+        };
 
         try {
-            const response = await login(data).unwrap();
-            console.log("Login response:", response);
+            const response = await login(data).unwrap(); // Gunakan endpoint login baru
+            console.log(response);
 
+            // Cek apakah yang login adalah admin atau user
             const { token, admin, user } = response;
 
+            // Simpan token di cookies (contoh: berlaku selama 7 hari)
+            setCookie('token', token, 7);
+
+            // Simpan token di localStorage
+            setLocalStorage('token', token);
+
+            // Set state untuk admin atau user di Redux
             if (admin) {
-                dispatch(setAuth({ user: admin, token })); // Jika admin login
+                dispatch(setAdmin({ admin })); // Set state untuk admin
             } else if (user) {
-                dispatch(setAuth({ user, token })); // Jika user login
+                dispatch(setUser({ user })); // Set state untuk user
             }
 
-            alert("Login successful");
-            navigate("/dashboard"); // Arahkan ke dashboard
-        } catch (error) {
-            console.error("Login failed:", error);
+            alert('Login successful');
+            navigate('/'); // Arahkan ke halaman utama setelah login
+        } catch (err) {
+            console.error(err);
             setMessage("Invalid email or password. Please try again.");
         }
     };
