@@ -9,10 +9,10 @@ import Login from "../pages/user/Login";
 import Register from "../pages/user/Register";
 import AdminLayout from "../pages/admin/AdminLayout";
 import Dashboard from "../pages/admin/dashboard/Dashboard"
-import AddPost from "../pages/admin/post/AddPost";
-import ManagePosts from "../pages/admin/post/ManagePosts";
-import ManageUser from "../pages/admin/user/ManageUser";
-import UpdatePost from "../pages/admin/post/updatePost";
+// import AddPost from "../pages/admin/post/AddPost";
+// import ManagePosts from "../pages/admin/post/ManagePosts";
+// import ManageUser from "../pages/admin/user/ManageUser";
+// import UpdatePost from "../pages/admin/post/updatePost";
 import PrivateRouter from "./PrivateRouter";
 
 
@@ -58,22 +58,22 @@ const router = createBrowserRouter([
                         path: "",
                         element: <Dashboard />
                     },
-                    {
-                        path: "add-new-post",
-                        element: <AddPost />
-                    },
-                    {
-                        path: "manage-items",
-                        element: <ManagePosts />
-                    },
-                    {
-                        path: "users",
-                        element: <ManageUser />
-                    },
-                    {
-                        path: "update-items/:id",
-                        element: <UpdatePost />
-                    },
+                    // {
+                    //     path: "add-new-post",
+                    //     element: <AddPost />
+                    // },
+                    // {
+                    //     path: "manage-items",
+                    //     element: <ManagePosts />
+                    // },
+                    // {
+                    //     path: "users",
+                    //     element: <ManageUser />
+                    // },
+                    // {
+                    //     path: "update-items/:id",
+                    //     element: <UpdatePost />
+                    // },
                 ]
             },
         ]
