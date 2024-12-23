@@ -12,6 +12,7 @@ import logoImg from "../../src/assets/jibo-logo.png"
 
 const navLists = [
     { name: 'Home', path: '/' },
+    { name: 'Product', path: '/Product' },
     { name: 'About Us', path: '/about-us' },
     { name: 'Company', path: '/Company' },
     { name: 'Contact Us', path: '/contact-us' },

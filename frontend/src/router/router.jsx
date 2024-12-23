@@ -9,6 +9,7 @@ import Login from "../pages/user/Login";
 import Register from "../pages/user/Register";
 import AdminLayout from "../pages/admin/AdminLayout";
 import Dashboard from "../pages/admin/dashboard/Dashboard"
+import Product from "../pages/product/Product";
 // import AddPost from "../pages/admin/post/AddPost";
 // import ManagePosts from "../pages/admin/post/ManagePosts";
 // import ManageUser from "../pages/admin/user/ManageUser";
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
                 path: "/about-us",
                 element: <About />
             },
+            {
+                path: "/Product",
+                element: <Product />
+            },
+
             {
                 path: "/Company",
                 element: <Company />
