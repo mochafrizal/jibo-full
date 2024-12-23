@@ -30,8 +30,8 @@ const AdminNavigation = () => {
     };
     return (
         <div className='space-y-5 bg-white p-8 md:h-[calc(100vh-98px)] flex flex-col justify-between'>
-            {/* header part */}
-            {/* <div className="">
+            <div className="">
+                {/* header part */}
                 <div className="mb-5">
                     <img src={AdminImg} alt="" className='size-14' />
                     <p className='font-semibold'>Admin</p>
@@ -51,7 +51,7 @@ const AdminNavigation = () => {
                         <NavLink to="/dashboard/users" className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}>Users</NavLink>
                     </li>
                 </ul>
-            </div> */}
+            </div>
             <div className="mb-3">
                 <hr className='mb-3' />
                 <button

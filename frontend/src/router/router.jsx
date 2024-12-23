@@ -4,7 +4,7 @@ import Home from "../pages/home/Home";
 import About from "../pages/about/About";
 import Company from "../pages/miniPage/Company";
 import ContactUs from "../pages/miniPage/contactUs";
-// import SingleBlog from "../pages/blogs/singleBlog/singleBlog";
+import SingglePost from "../pages/posts/singglePost";
 import Login from "../pages/user/Login";
 import Register from "../pages/user/Register";
 import AdminLayout from "../pages/admin/AdminLayout";
@@ -37,10 +37,10 @@ const router = createBrowserRouter([
                 path: "/contact-us",
                 element: <ContactUs />
             },
-            // {
-            //     path: "/blogs/:id",
-            //     element: <SingleBlog />
-            // },
+            {
+                path: "/posts/:id",
+                element: <SingglePost />
+            },
             {
                 path: "/login",
                 element: <Login />

@@ -8,11 +8,13 @@ import productRouter from './routes/productRoutes.js';
 import { connect } from './library/db.js';
 import { errorHandler } from './middleeware/errorHandler.js';
 import logoutRouter from './routes/logoutRouter.js';
+import path from 'path';
 
-// Membuat aplikasi Express
 const app = express();
 const port = process.env.PORT || 3000;
 
+//  untuk dapat mengakses file dari folder uploads
+app.use('/uploads', express.static(path.join(path.resolve(), 'src/uploads')));
 // Middleware CORS
 app.use(cors({
     origin: 'http://localhost:5173', // URL frontend Anda
