@@ -12,7 +12,7 @@ export const productApi = createApi({
     endpoints: (builder) => ({
         // Mendapatkan semua produk
         fetchGetAllProducts: builder.query({
-            query: () => '/product', // Sesuaikan endpoint dengan backend Anda
+            query: () => '/product',
         }),
         // Mendapatkan detail produk
         fetchGetProduct: builder.query({

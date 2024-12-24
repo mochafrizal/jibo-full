@@ -1,16 +1,11 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import { RiArrowLeftLine, RiArrowRightLine } from 'react-icons/ri';
 import { FiPhone } from 'react-icons/fi';
 
-// Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-
 // Import gambar
 import Img1 from '../assets/hero-carousel/img1.jpg';
 import Img2 from '../assets/hero-carousel/img2.jpg';
@@ -19,10 +14,84 @@ import Img4 from '../assets/hero-carousel/img4.jpg';
 
 const Hero = () => {
     const swiperRef = useRef(null);
+
+    // Array gambar untuk carousel
     const carouselImages = [Img1, Img2, Img3, Img4];
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 1.2,
+                ease: "easeOut",
+                staggerChildren: 0.3,
+                delayChildren: 0.4
+            }
+        },
+    };
+
+    const leftItemVariants = {
+        hidden: {
+            x: '-100%',
+            opacity: 0,
+            rotate: -5
+        },
+        visible: {
+            x: 0,
+            opacity: 1,
+            rotate: 0,
+            transition: {
+                type: 'spring',
+                stiffness: 60,
+                damping: 15,
+                duration: 1
+            }
+        },
+    };
+
+    const rightItemVariants = {
+        hidden: {
+            x: '100%',
+            opacity: 0,
+            scale: 0.8
+        },
+        visible: {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            transition: {
+                type: 'spring',
+                stiffness: 50,
+                damping: 15,
+                duration: 1.2
+            }
+        },
+    };
+
+    const textVariants = {
+        hidden: {
+            y: 50,
+            opacity: 0
+        },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: 'spring',
+                stiffness: 100,
+                damping: 12,
+                duration: 0.8
+            }
+        }
+    };
 
     return (
-        <motion.div className="text-red-100 p-0 xl:h-full bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950">
+        <motion.div
+            className="text-red-100 p-0 xl:h-full bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+        >
             <div className="flex flex-col lg:flex-row xl:h-[720px]">
                 {/* Left Section */}
                 <motion.div
@@ -61,86 +130,65 @@ const Hero = () => {
                         </motion.button>
                     </div>
 
-                    {/* Navigation Buttons */}
                     <motion.div
-                        className="flex items-center justify-center gap-4 w-full h-[100px] bg-gray-950/90 backdrop-blur-md"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.1, duration: 0.8 }}
+                        className="flex items-center justify-center gap-4 bg-gray-950/90 backdrop-blur-md w-full h-[100px] shadow-lg"
+                        variants={textVariants}
                     >
                         <motion.div
-                            className="flex gap-4"
+                            id="prev"
+                            className="text-lg h-12 w-12 border-2 border-red-600 rounded-full grid place-items-center cursor-pointer hover:bg-red-600 hover:text-white transition-all duration-300"
+                            whileHover={{
+                                scale: 1.2,
+                                boxShadow: "0 0 15px rgba(220, 38, 38, 0.4)"
+                            }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => swiperRef.current?.slidePrev()}
                         >
-                            <motion.div
-                                className="text-lg h-12 w-12 border-2 border-red-600 rounded-full grid place-items-center cursor-pointer hover:bg-red-600 hover:text-white transition-all"
-                                whileHover={{ scale: 1.2 }}
-                                whileTap={{ scale: 0.9 }}
-                                onClick={() => swiperRef.current?.slidePrev()}
-                            >
-                                <RiArrowLeftLine size={24} />
-                            </motion.div>
-                            <motion.div
-                                className="text-lg h-12 w-12 border-2 border-red-600 rounded-full grid place-items-center cursor-pointer hover:bg-red-600 hover:text-white transition-all"
-                                whileHover={{ scale: 1.2 }}
-                                whileTap={{ scale: 0.9 }}
-                                onClick={() => swiperRef.current?.slideNext()}
-                            >
-                                <RiArrowRightLine size={24} />
-                            </motion.div>
+                            <RiArrowLeftLine size={24} />
+                        </motion.div>
+                        <motion.div
+                            id="next"
+                            className="text-lg h-12 w-12 border-2 border-red-600 rounded-full grid place-items-center cursor-pointer hover:bg-red-600 hover:text-white transition-all duration-300"
+                            whileHover={{
+                                scale: 1.2,
+                                boxShadow: "0 0 15px rgba(220, 38, 38, 0.4)"
+                            }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => swiperRef.current?.slideNext()}
+                        >
+                            <RiArrowRightLine size={24} />
                         </motion.div>
                     </motion.div>
                 </motion.div>
 
-                {/* Right Section */}
                 <motion.div
                     className="lg:w-[70%] overflow-hidden p-4"
-                    initial={{ opacity: 0, x: 300 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1 }}
+                    variants={rightItemVariants}
                 >
                     <Swiper
-                        effect={'coverflow'}
-                        grabCursor={true}
-                        centeredSlides={true}
-                        slidesPerView={'auto'}
-                        coverflowEffect={{
-                            rotate: 50,
-                            stretch: 0,
-                            depth: 100,
-                            modifier: 1,
-                            slideShadows: true,
-                        }}
+                        slidesPerView={1}
+                        spaceBetween={10}
                         autoplay={{
                             delay: 3000,
                             disableOnInteraction: false,
-                            pauseOnMouseEnter: true,
+                            pauseOnMouseEnter: true
                         }}
-                        pagination={{
-                            dynamicBullets: true,
-                            clickable: true,
-                        }}
-                        modules={[Autoplay, EffectCoverflow, Navigation, Pagination]}
-                        className="mySwiper h-full w-full"
+                        modules={[Autoplay]}
+                        className="h-full"
                         onSwiper={(swiper) => (swiperRef.current = swiper)}
                     >
                         {carouselImages.map((image, index) => (
-                            <SwiperSlide key={index} className="w-4/5">
+                            <SwiperSlide key={index}>
                                 <motion.div
-                                    className="relative group overflow-hidden rounded-xl"
                                     whileHover={{ scale: 1.02 }}
                                     transition={{ duration: 0.3 }}
+                                    className="h-full"
                                 >
                                     <img
                                         src={image}
                                         alt={`Slide ${index + 1}`}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        className="block w-full h-full object-cover rounded-xl"
                                     />
-                                    <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                            <h3 className="text-xl font-bold">Project {index + 1}</h3>
-                                            <p className="text-sm">Modern Design & Architecture</p>
-                                        </div>
-                                    </div>
                                 </motion.div>
                             </SwiperSlide>
                         ))}
