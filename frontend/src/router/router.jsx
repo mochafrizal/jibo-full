@@ -18,6 +18,7 @@ import UploadPost from "../pages/admin/menegepost/upload-post";
 import UploadProduct from "../pages/admin/menegeproduct/upload-product";
 import ProductsMenege from "../pages/admin/menegeproduct/product-menege";
 import PostsMenege from "../pages/admin/menegepost/menege-post";
+import ManageUsers from "../pages/admin/menegeuser/menege-user";
 
 
 const router = createBrowserRouter([
@@ -83,10 +84,10 @@ const router = createBrowserRouter([
                         path: "product-manage",
                         element: <ProductsMenege />
                     },
-                    // {
-                    //     path: "users",
-                    //     element: <ManageUser />
-                    // },
+                    {
+                        path: "manage-user",
+                        element: <ManageUsers />
+                    },
                     // {
                     //     path: "update-items/:id",
                     //     element: <UpdatePost />

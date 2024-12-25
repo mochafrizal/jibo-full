@@ -7,31 +7,39 @@ import { logout } from '../../redux/features/auth/authSlice';
 
 const AdminNavigation = () => {
     const dispatch = useDispatch();
-    const [logoutUser] = useLogoutMutation();
-
     const handleLogout = async () => {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-            console.error("Token tidak ditemukan di localStorage");
-            return;
-        }
-
         try {
-            await logoutUser().unwrap();  // Memanggil API logout
-            localStorage.removeItem("token");  // Menghapus token dari localStorage
-            localStorage.removeItem("auth");  // Menghapus data autentikasi lain jika ada
-            dispatch(logout());  // Menghapus state autentikasi dari Redux
+            const authData = JSON.parse(localStorage.getItem("auth"));
 
-            // Redirect atau logika lain setelah logout
+            if (!authData?.token) {
+                console.error("Token tidak ditemukan");
+                return;
+            }
+
+            // Kirim permintaan logout dengan token di header Authorization
+            await logoutUser({
+                token: authData.token, // jika API meminta token sebagai parameter body, perhatikan dokumentasi API
+            }).unwrap();
+
+            // Jika logout berhasil, hapus data autentikasi
+            localStorage.removeItem("auth");
+            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            dispatch(logout());
+
+            // Redirect ke halaman login
+            window.location.href = '/login';
         } catch (error) {
-            console.error("Logout gagal:", error);
+            // Tampilkan pesan kesalahan
+            console.error("Logout gagal:", error?.data?.details || error?.message || "Kesalahan tidak diketahui");
         }
     };
+
+
+
     return (
         <div className='space-y-5 bg-white p-8 md:h-[calc(100vh-98px)] flex flex-col justify-between'>
             <div className="">
-                {/* header part */}
+
                 <div className="mb-5">
                     <img src={AdminImg} alt="" className='size-14' />
                     <p className='font-semibold'>Admin</p>
@@ -49,7 +57,7 @@ const AdminNavigation = () => {
                         <NavLink to="/dashboard/product-manage" className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}>Manage Product Items</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/users" className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}>Users</NavLink>
+                        <NavLink to="/dashboard/manage-user" className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}>manage Users & Admins</NavLink>
                     </li>
                 </ul>
             </div>

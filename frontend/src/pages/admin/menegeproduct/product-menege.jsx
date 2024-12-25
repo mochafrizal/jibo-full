@@ -111,9 +111,9 @@ const ProductsMenege = () => {
             {/* Products Table */}
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white border border-gray-200">
-                    <thead className="bg-gray-50">
+                    <thead className="bg-gray-200">
                         <tr>
-                            <th className="px-6 py-3 border-b text-left">Image</th>
+                            <th className="px-6 py-3 border-b text-left">No</th>
                             <th className="px-6 py-3 border-b text-left">Name</th>
                             <th className="px-6 py-3 border-b text-left">Price</th>
                             <th className="px-6 py-3 border-b text-left">Stock</th>
@@ -121,15 +121,9 @@ const ProductsMenege = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {productsData?.products.map((product) => (
+                        {productsData?.products.map((product, index) => (
                             <tr key={product._id} className="hover:bg-gray-50">
-                                <td className="px-6 py-4 border-b">
-                                    <img
-                                        src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${product.image}`}
-                                        alt={product.name}
-                                        className="w-20 h-20 object-cover"
-                                    />
-                                </td>
+                                <td className="px-6 py-4 border-b">{index + 1}</td>
                                 <td className="px-6 py-4 border-b">{product.name}</td>
                                 <td className="px-6 py-4 border-b">Rp{product.price}</td>
                                 <td className="px-6 py-4 border-b">{product.stock}</td>
@@ -150,6 +144,7 @@ const ProductsMenege = () => {
                             </tr>
                         ))}
                     </tbody>
+
                 </table>
             </div>
 
