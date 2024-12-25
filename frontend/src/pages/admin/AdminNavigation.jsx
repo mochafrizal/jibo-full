@@ -41,6 +41,7 @@ const AdminNavigation = () => {
                     <li>
                         <NavLink to="/dashboard" end className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}> Dashboard</NavLink>
                     </li>
+                    <hr className='mb-3' />
                     <li>
                         <NavLink to="/dashboard/post-manage" className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}>Manage post Items</NavLink>
                     </li>
@@ -53,7 +54,7 @@ const AdminNavigation = () => {
                 </ul>
             </div>
             <div className="mb-3">
-                <hr className='mb-3' />
+                <hr className='mb-3 bg-red-700' />
                 <button
                     onClick={handleLogout}
                     className='text-white bg-red-600 font-medium px-5 py-1 rounded-md'>Logout</button>

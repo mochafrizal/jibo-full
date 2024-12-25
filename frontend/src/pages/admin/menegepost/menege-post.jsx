@@ -220,27 +220,30 @@ const PostsManage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {postsData?.posts.map((post, index) => (
-                        <tr key={post._id}>
-                            <td className="border border-gray-300 px-4 py-2 text-center">{index + 1}</td>
-                            <td className="border border-gray-300 px-4 py-2">{post.title}</td>
-                            <td className="border border-gray-300 px-4 py-2 text-center">{new Date(post.createdAt).toLocaleDateString()}</td>
-                            <td className="border border-gray-300 px-4 py-2 text-center">
-                                <button
-                                    onClick={() => openEditModal(post)}
-                                    className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded mr-2"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(post._id)}
-                                    className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                    {postsData?.posts
+                        ?.slice() // Membuat salinan array agar tidak mengubah data asli
+                        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // Urutkan dari terbaru ke terlama
+                        .map((post, index) => (
+                            <tr key={post._id}>
+                                <td className="border border-gray-300 px-4 py-2 text-center">{index + 1}</td>
+                                <td className="border border-gray-300 px-4 py-2">{post.title}</td>
+                                <td className="border border-gray-300 px-4 py-2 text-center">{new Date(post.createdAt).toLocaleDateString()}</td>
+                                <td className="border border-gray-300 px-4 py-2 text-center">
+                                    <button
+                                        onClick={() => openEditModal(post)}
+                                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded mr-2"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(post._id)}
+                                        className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
 

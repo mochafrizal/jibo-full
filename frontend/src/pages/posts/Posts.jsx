@@ -5,14 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Posts = () => {
     const { data, error, isLoading } = useFetchGetAllPostsQuery();
-    const posts = data?.posts || [];
-    console.log(posts)
+    const posts = data?.posts?.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) || [];
+    console.log(posts);
 
     const getImageUrl = (image) => {
         return `http://localhost:3000/uploads/${image}`;
     };
 
-    // Animasi untuk container utama
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -24,7 +23,6 @@ const Posts = () => {
         }
     };
 
-    // Animasi untuk setiap post
     const postVariants = {
         hidden: {
             opacity: 0,
@@ -52,7 +50,6 @@ const Posts = () => {
         }
     };
 
-    // Animasi untuk header
     const headerVariants = {
         hidden: { opacity: 0, y: -30 },
         visible: {
@@ -67,7 +64,6 @@ const Posts = () => {
         }
     };
 
-    // Komponen Loading Skeleton
     const LoadingSkeleton = () => (
         <div className="grid grid-cols-1 gap-10 mt-16 md:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3, 4, 5, 6].map((item) => (
@@ -98,7 +94,6 @@ const Posts = () => {
             transition={{ duration: 0.8 }}
             className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden py-28 px-6"
         >
-            {/* Border dekoratif */}
             <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}

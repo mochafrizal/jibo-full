@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Product = () => {
     const { data, error, isLoading } = useFetchGetAllProductsQuery();
-    const products = data?.products || [];
+    // Urutkan produk dari baru ke lama berdasarkan 'createdAt'
+    const products = data?.products?.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) || [];
 
     const getImageUrl = (image) => {
         return `http://localhost:3000/uploads/${image}`;
@@ -137,7 +138,7 @@ const Product = () => {
                                     </motion.div>
 
                                     <motion.div
-                                        className="p-6 w-full md:w-1/4 flex flex-col justify-between"
+                                        className="p-6 w-full md:w-1/4 flex flex-col justify-between ml-3"
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         transition={{ delay: 0.2 }}
@@ -145,17 +146,18 @@ const Product = () => {
                                         <div>
                                             <motion.h4
                                                 whileHover={{ x: 5 }}
-                                                className="mb-2 block font-sans text-2xl font-semibold leading-snug tracking-normal text-black"
+                                                className="mb-2 block font-sans text-2xl text-center font-semibold leading-snug tracking-normal text-black"
                                             >
                                                 {product.name || 'Produk Tanpa Nama'}
                                             </motion.h4>
+                                            <hr className='mb-14 bg-red-700' />
                                             <motion.h6
                                                 whileHover={{ scale: 1.05 }}
-                                                className="mb-4 block font-sans text-lg font-semibold leading-relaxed tracking-normal text-gray-700"
+                                                className="mb-4 block font-sans text-lg font-bold leading-relaxed tracking-normal text-black"
                                             >
                                                 Rp. {product.price.toLocaleString('id-ID')}
                                             </motion.h6>
-                                            <motion.p className="mb-4 block font-sans text-base font-normal leading-relaxed text-black">
+                                            <motion.p className="mb-4 block font-sans text-lg font-bold leading-relaxed text-black">
                                                 {product.stock > 0 ? (
                                                     <span className="text-black">Stok: {product.stock}</span>
                                                 ) : (
@@ -164,7 +166,7 @@ const Product = () => {
                                             </motion.p>
                                         </div>
 
-                                        <Link to={`/product/${product._id}`} className="inline-block mt-auto">
+                                        {/* <Link to={`/product/${product._id}`} className="inline-block mt-auto">
                                             <motion.button
                                                 whileHover={{ scale: 1.05, backgroundColor: "#374151" }}
                                                 whileTap={{ scale: 0.95 }}
@@ -179,7 +181,7 @@ const Product = () => {
                                                     <BsArrowRight className="h-4 w-4" />
                                                 </motion.span>
                                             </motion.button>
-                                        </Link>
+                                        </Link> */}
                                     </motion.div>
                                 </motion.div>
                             ))}
