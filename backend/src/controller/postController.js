@@ -1,6 +1,6 @@
 import Post from "../model/post.js";
 
-export const getAllPosts = async (req, res, next)=>{
+export const getAllPosts = async (req, res, next) => {
     try {
         const posts = await Post.find().populate('createdBy', 'name')
         res.status(200).json({ posts })
@@ -12,7 +12,7 @@ export const getAllPosts = async (req, res, next)=>{
 export const getPost = async (req, res, next) => {
     const post = await Post.findById(req.params.id);
 
-    if(!post) return res.status(400).json({ error: 'Postingan tidak ditemukan' })
+    if (!post) return res.status(400).json({ error: 'Postingan tidak ditemukan' })
     try {
         return res.status(200).json({ post })
     } catch (error) {
@@ -50,7 +50,7 @@ export const updatePost = async (req, res, next) => {
             content,
             createdBy: req.user.userId,
         }
-        if(req.file) updPost.image = req.file.filename;
+        if (req.file) updPost.image = req.file.filename;
         // if(image) updPost.image = image;
         // if(req.file){
         //     img = req.file.filename;
@@ -58,7 +58,7 @@ export const updatePost = async (req, res, next) => {
         // } 
 
         const updatedPost = await Post.findOneAndUpdate(
-            { _id : id },
+            { _id: id },
             { $set: updPost },
             { new: true }
         )

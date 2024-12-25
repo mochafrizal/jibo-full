@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Posts = () => {
     const { data, error, isLoading } = useFetchGetAllPostsQuery();
     const posts = data?.posts || [];
+    console.log(posts)
 
     const getImageUrl = (image) => {
         return `http://localhost:3000/uploads/${image}`;

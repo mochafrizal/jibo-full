@@ -42,10 +42,10 @@ const AdminNavigation = () => {
                         <NavLink to="/dashboard" end className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}> Dashboard</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/add-new-post" className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}> Add New Post</NavLink>
+                        <NavLink to="/dashboard/post-manage" className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}>Manage post Items</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/manage-items" className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}>Manage Items</NavLink>
+                        <NavLink to="/dashboard/product-manage" className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}>Manage Product Items</NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/users" className={({ isActive }) => isActive ? "text-blue-600 font-bold" : "text-black"}>Users</NavLink>

@@ -1,13 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'; // Base URL disesuaikan dengan lingkungan
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
 export const postApi = createApi({
     reducerPath: 'postApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: BASE_URL, // Menggunakan variabel BASE_URL
-        credentials: 'include', // Untuk cookie lintas asal
+        baseUrl: BASE_URL,
+        prepareHeaders: (headers, { getState }) => {
+            const token = getState().auth.token;
+            if (token) {
+                headers.set('authorization', `Bearer ${token}`);
+            }
+            return headers;
+        },
     }),
+    // ... rest of the code stays the same
     tagTypes: ['Posts'],
     endpoints: (builder) => ({
         fetchGetAllPosts: builder.query({

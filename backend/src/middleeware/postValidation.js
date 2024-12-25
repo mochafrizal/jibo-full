@@ -14,9 +14,9 @@ export const createPostValidation = [
         .isLength({ min: 5 })
         .withMessage("content minimal 5 karakter"),
     check('image')
-        .custom((value, {req}) => {
+        .custom((value, { req }) => {
             // console.log("File yang diunggah di validasi:", req.file); 
-            if(!req.file){
+            if (!req.file) {
                 throw new Error('Silahkan upload gambar terlebih dulu')
             }
 
@@ -36,20 +36,18 @@ export const updatePostValidation = [
         .withMessage('Panjang konten antara 5-20 karakter'),
     body('content')
         .optional()
-        .isLength({ min: 5, max: 20 })
-        .withMessage('Panjang konten antara 5-20 karakter'),
+        .isLength({ min: 5, max: 2000 })
+        .withMessage('Panjang konten antara 5-2000 karakter'),
     check('image')
-        .custom((value, {req}) => {
-		   if(!req.file){
-				return true;
-		   }
-
-           const allowedExtensions = ['image/jpeg', 'image/png']; 
-
-           if (!allowedExtensions.includes(req.file.mimetype)) {
-           		throw new Error('Hanya file JPG atau PNG yang diperbolehkan');
-           }
-		   return true;
+        .custom((value, { req }) => {
+            if (!req.file) {
+                return true;
+            }
+            const allowedExtensions = ['image/jpeg', 'image/png'];
+            if (!allowedExtensions.includes(req.file.mimetype)) {
+                throw new Error('Hanya file JPG atau PNG yang diperbolehkan');
+            }
+            return true;
         })
 ]
 

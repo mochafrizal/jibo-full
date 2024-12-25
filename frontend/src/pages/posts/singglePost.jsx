@@ -20,7 +20,7 @@ const SingglePost = () => {
             return 'https://via.placeholder.com/1200x600?text=Error+Loading+Image';
         }
     };
-
+    console.log(post)
     // Fungsi untuk memformat tanggal dengan penanganan error
     const formatDate = (dateString) => {
         try {

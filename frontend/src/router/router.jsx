@@ -10,11 +10,14 @@ import Register from "../pages/user/Register";
 import AdminLayout from "../pages/admin/AdminLayout";
 import Dashboard from "../pages/admin/dashboard/Dashboard"
 import Product from "../pages/product/Product";
-// import AddPost from "../pages/admin/post/AddPost";
 // import ManagePosts from "../pages/admin/post/ManagePosts";
 // import ManageUser from "../pages/admin/user/ManageUser";
 // import UpdatePost from "../pages/admin/post/updatePost";
 import PrivateRouter from "./PrivateRouter";
+import UploadPost from "../pages/admin/menegepost/upload-post";
+import UploadProduct from "../pages/admin/menegeproduct/upload-product";
+import ProductsMenege from "../pages/admin/menegeproduct/product-menege";
+import PostsMenege from "../pages/admin/menegepost/menege-post";
 
 
 const router = createBrowserRouter([
@@ -64,14 +67,22 @@ const router = createBrowserRouter([
                         path: "",
                         element: <Dashboard />
                     },
-                    // {
-                    //     path: "add-new-post",
-                    //     element: <AddPost />
-                    // },
-                    // {
-                    //     path: "manage-items",
-                    //     element: <ManagePosts />
-                    // },
+                    {
+                        path: "upload-post",
+                        element: <UploadPost />
+                    },
+                    {
+                        path: "upload-product",
+                        element: <UploadProduct />
+                    },
+                    {
+                        path: "post-manage",
+                        element: <PostsMenege />
+                    },
+                    {
+                        path: "product-manage",
+                        element: <ProductsMenege />
+                    },
                     // {
                     //     path: "users",
                     //     element: <ManageUser />
@@ -87,3 +98,4 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+

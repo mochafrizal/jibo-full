@@ -13,12 +13,12 @@ import path from 'path';
 const app = express();
 const port = process.env.PORT || 3000;
 
-//  untuk dapat mengakses file dari folder uploads
+//  untuk dapat mengakses file gambar dari folder uploads
 app.use('/uploads', express.static(path.join(path.resolve(), 'src/uploads')));
 // Middleware CORS
 app.use(cors({
     origin: 'http://localhost:5173', // URL frontend Anda
-    credentials: true, //pengiriman cookie lintas asal
+    credentials: true,
 }));
 
 // Middleware parsing request body
