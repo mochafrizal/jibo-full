@@ -6,19 +6,18 @@ import Company from "../pages/miniPage/Company";
 import ContactUs from "../pages/miniPage/contactUs";
 import SingglePost from "../pages/posts/singglePost";
 import Login from "../pages/user/Login";
-import Register from "../pages/user/Register";
+import Register from "../pages/user/AdminRegister";
 import AdminLayout from "../pages/admin/AdminLayout";
 import Dashboard from "../pages/admin/dashboard/Dashboard"
 import Product from "../pages/product/Product";
-// import ManagePosts from "../pages/admin/post/ManagePosts";
-// import ManageUser from "../pages/admin/user/ManageUser";
-// import UpdatePost from "../pages/admin/post/updatePost";
 import PrivateRouter from "./PrivateRouter";
 import UploadPost from "../pages/admin/menegepost/upload-post";
 import UploadProduct from "../pages/admin/menegeproduct/upload-product";
 import ProductsMenege from "../pages/admin/menegeproduct/product-menege";
 import PostsMenege from "../pages/admin/menegepost/menege-post";
 import ManageUsers from "../pages/admin/menegeuser/menege-user";
+import UserRegister from "../pages/user/UserRegister";
+import AdminRegister from "../pages/user/AdminRegister";
 
 
 const router = createBrowserRouter([
@@ -56,11 +55,11 @@ const router = createBrowserRouter([
                 element: <Login />
             },
             {
-                path: "/register",
-                element: <Register />
+                path: "/user-register",
+                element: <UserRegister />
             },
             {
-                // its will be protected by the admin : use private routes 
+                // private routes 
                 path: "/dashboard",
                 element: <PrivateRouter> <AdminLayout /> </PrivateRouter>,
                 children: [
@@ -88,10 +87,10 @@ const router = createBrowserRouter([
                         path: "manage-user",
                         element: <ManageUsers />
                     },
-                    // {
-                    //     path: "update-items/:id",
-                    //     element: <UpdatePost />
-                    // },
+                    {
+                        path: "admin-register",
+                        element: <AdminRegister />
+                    },
                 ]
             },
         ]

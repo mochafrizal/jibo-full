@@ -21,6 +21,7 @@ const baseApi = createApi({
             query: () => ({
                 url: '/logout',
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`, // ambil token dari localStorage
                 },

@@ -117,34 +117,40 @@ const ProductsMenege = () => {
                             <th className="px-6 py-3 border-b text-left">Name</th>
                             <th className="px-6 py-3 border-b text-left">Price</th>
                             <th className="px-6 py-3 border-b text-left">Stock</th>
+                            <th className="px-6 py-3 border-b text-center">Created At</th>
                             <th className="px-6 py-3 border-b text-left">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {productsData?.products.map((product, index) => (
-                            <tr key={product._id} className="hover:bg-gray-50">
-                                <td className="px-6 py-4 border-b">{index + 1}</td>
-                                <td className="px-6 py-4 border-b">{product.name}</td>
-                                <td className="px-6 py-4 border-b">Rp{product.price}</td>
-                                <td className="px-6 py-4 border-b">{product.stock}</td>
-                                <td className="px-6 py-4 border-b">
-                                    <button
-                                        onClick={() => openEditModal(product)}
-                                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded mr-2"
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(product._id)}
-                                        className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
+                        {productsData?.products
+                            .slice()
+                            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                            .map((product, index) => (
+                                <tr key={product._id} className="hover:bg-gray-50">
+                                    <td className="px-6 py-4 border-b">{index + 1}</td>
+                                    <td className="px-6 py-4 border-b">{product.name}</td>
+                                    <td className="px-6 py-4 border-b">Rp{product.price}</td>
+                                    <td className="px-6 py-4 border-b">{product.stock}</td>
+                                    <td className="px-6 py-4 border-b text-center">
+                                        {new Date(product.createdAt).toLocaleDateString()}
+                                    </td>
+                                    <td className="px-6 py-4 border-b">
+                                        <button
+                                            onClick={() => openEditModal(product)}
+                                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded mr-2"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(product._id)}
+                                            className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                     </tbody>
-
                 </table>
             </div>
 

@@ -133,7 +133,7 @@ const Login = () => {
 
             <p className="my-5 text-center text-gray-600">
                 Belum punya akun?{" "}
-                <Link to="/register" className="text-primary hover:text-indigo-500 font-medium">
+                <Link to="/user-register" className="text-primary hover:text-indigo-500 font-medium">
                     Daftar disini
                 </Link>
             </p>

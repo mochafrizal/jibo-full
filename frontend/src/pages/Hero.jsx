@@ -200,3 +200,125 @@ const Hero = () => {
 };
 
 export default Hero;
+
+
+// import React, { useState, useEffect } from 'react';
+
+// const Hero = () => {
+//     const [currentSlide, setCurrentSlide] = useState(0);
+//     const [isAnimating, setIsAnimating] = useState(false);
+
+//     // Sample data for slides
+//     const slides = [
+//         {
+//             image: "/api/placeholder/1200/800",
+//             title: "ELDON DR",
+//             size: "250 SQ. M.",
+//             price: "$ 370 000",
+//             projectCount: "63+ WORKS"
+//         },
+//         {
+//             image: "/api/placeholder/1200/800",
+//             title: "MAPLE AVE",
+//             size: "180 SQ. M.",
+//             price: "$ 290 000",
+//             projectCount: "63+ WORKS"
+//         },
+//         {
+//             image: "/api/placeholder/1200/800",
+//             title: "OAKWOOD ST",
+//             size: "320 SQ. M.",
+//             price: "$ 450 000",
+//             projectCount: "63+ WORKS"
+//         }
+//     ];
+
+//     const handleNext = () => {
+//         if (isAnimating) return;
+//         setIsAnimating(true);
+//         setCurrentSlide((prev) => (prev + 1) % slides.length);
+//         setTimeout(() => setIsAnimating(false), 500);
+//     };
+
+//     const handlePrev = () => {
+//         if (isAnimating) return;
+//         setIsAnimating(true);
+//         setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+//         setTimeout(() => setIsAnimating(false), 500);
+//     };
+
+//     // Auto slide effect
+//     useEffect(() => {
+//         const interval = setInterval(handleNext, 5000);
+//         return () => clearInterval(interval);
+//     }, []);
+
+//     return (
+//         <div className="bg-black min-h-screen relative">
+//             <div className="flex flex-col lg:flex-row h-screen">
+//                 {/* Left Section */}
+//                 <div className="lg:w-[40%] flex flex-col justify-between p-8 lg:p-16 z-10">
+//                     <div className="space-y-8">
+//                         <h1 className="text-white text-6xl font-bold tracking-wider">
+//                             DESIGNING<br />& BUILDING
+//                         </h1>
+//                         <div className="text-red-600 space-y-2">
+//                             <p className="text-xl font-semibold">ENERGY-EFFICIENT</p>
+//                             <p className="text-xl font-semibold">MODERN RESIDENCES</p>
+//                             <p className="text-xl font-semibold">FROM 130 SQ. M.</p>
+//                         </div>
+//                         <button className="border border-red-600 text-white px-8 py-3 hover:bg-red-600 transition-colors duration-300 text-lg">
+//                             CONTACT US
+//                         </button>
+//                     </div>
+
+//                     <div className="flex items-center gap-4">
+//                         <button
+//                             onClick={handlePrev}
+//                             className="w-12 h-12 border border-gray-600 rounded-full flex items-center justify-center text-white hover:border-red-600 hover:bg-red-600 transition-all duration-300"
+//                         >
+//                             ←
+//                         </button>
+//                         <button
+//                             onClick={handleNext}
+//                             className="w-12 h-12 border border-gray-600 rounded-full flex items-center justify-center text-white hover:border-red-600 hover:bg-red-600 transition-all duration-300"
+//                         >
+//                             →
+//                         </button>
+//                     </div>
+//                 </div>
+
+//                 {/* Right Section - Carousel */}
+//                 <div className="lg:w-[60%] relative overflow-hidden">
+//                     {slides.map((slide, index) => (
+//                         <div
+//                             key={index}
+//                             className={`absolute inset-0 transition-all duration-700 ease-in-out ${index === currentSlide
+//                                 ? 'opacity-100 translate-x-0'
+//                                 : 'opacity-0 translate-x-full'
+//                                 }`}
+//                         >
+//                             <img
+//                                 src={slide.image}
+//                                 alt={`Slide ${index + 1}`}
+//                                 className="w-full h-full object-cover"
+//                             />
+//                             <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-8 text-white">
+//                                 <div className="flex justify-between items-center">
+//                                     <h2 className="text-4xl font-bold">{slide.projectCount}</h2>
+//                                     <div className="space-x-8">
+//                                         <span className="text-2xl font-bold">{slide.title}</span>
+//                                         <span className="text-2xl text-red-600">{slide.size}</span>
+//                                         <span className="text-2xl text-red-600">{slide.price}</span>
+//                                     </div>
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     ))}
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default Hero;
