@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from "framer-motion";
 
 // Import images
 import slide1 from '../assets/slide-1.jpg';
@@ -85,50 +86,74 @@ const Hero = () => {
     };
 
     return (
-        <div className=" relative min-h-screen bg-[#120d0d] text-white">
-            <div className="flex flex-col lg:flex-row xl:h-full">
+        <div className="relative min-h-screen bg-[#120d0d] text-white">
+            <div className="flex flex-col lg:flex-row h-full">
                 {/* Left Section */}
-                <div className="relative flex flex-col justify-between lg:w-[30%]">
-                    {/* Border elements */}
-                    <div className="home__title h-[calc(100%-100px)] flex flex-col gap-8 items-center justify-center py-12 xl:py-28 xl:gap-16 xl:max-w-xs xl:mx-auto">
-                        <h1 className=" text-3xl xl:text-5xl font-bold uppercase opacity-0 animate-[fadeIn_0.5s_ease-in-out_forwards]">
+                <div className="relative flex flex-col justify-between lg:w-[30%] px-4 sm:px-6 py-8 lg:py-0">
+                    <div className="home__title flex flex-col gap-6 lg:gap-8 items-center justify-center lg:h-[calc(100%-100px)] lg:py-12 xl:py-1 xl:gap-16 xl:max-w-xs xl:mx-auto">
+                        <motion.h1
+                            className="text-xl sm:text-2xl xl:text-5xl font-bold uppercase text-center lg:text-left w-full"
+                            initial={{ opacity: 0, x: -300 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 1 }}
+                        >
                             Designing <br />
                             & building
-                        </h1>
+                        </motion.h1>
 
-                        <h4 className="text-[#E31E24] font-bold uppercase xl:self-end opacity-0 animate-[fadeIn_0.5s_ease-in-out_0.2s_forwards]">
+                        <motion.h4
+                            className="text-[#E31E24] font-bold uppercase text-center lg:text-left lg:self-end text-sm sm:text-base"
+                            initial={{ opacity: 1, x: -100 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 2 }}
+                        >
                             Energy-efficient <br />
                             modern residences <br />
                             from 130 sq. m.
-                        </h4>
+                        </motion.h4>
 
-                        <button className="border border-[#E31E24] px-5 py-2 uppercase hover:bg-[#E31E24] transition-colors duration-300 xl:self-start opacity-0 animate-[fadeIn_0.5s_ease-in-out_0.4s_forwards]">
+                        <motion.button
+                            className="border border-[#E31E24] px-5 py-2 uppercase hover:bg-[#E31E24] transition-colors duration-300 xl:self-start] opacity-1"
+                            initial={{ opacity: 0, x: -300 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 3 }}
+                        >
                             contact us
-                        </button>
+                        </motion.button>
                     </div>
 
-                    <div className="button__control flex items-center justify-center gap-3 bg-[#151313] w-full h-[100px] opacity-0 animate-[fadeIn_0.5s_ease-in-out_0.6s_forwards]">
-                        <button
+                    <div className="button__control flex items-center justify-center gap-3 bg-[#121010] w-full h-[80px] lg:h-[100px] mt-6 lg:mt-0">
+                        <motion.button
                             onClick={handlePrevSlide}
-                            className="carousel__button__prev h-12 w-12 border-2 border-[#808080] rounded-full grid place-items-center hover:text-[#808080] transition-colors duration-300"
+                            className="carousel__button__prev h-10 w-10 lg:h-12 lg:w-12 border-2 border-[#808080] rounded-full grid place-items-center"
                             disabled={isSliding}
+                            initial={{ opacity: 0, y: -100 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 2 }}
                         >
-                            <ChevronLeft className="w-6 h-6" />
-                        </button>
-                        <button
+                            <ChevronLeft className="w-5 h-5 lg:w-6 lg:h-6" />
+                        </motion.button>
+                        <motion.button
                             onClick={handleNextSlide}
-                            className="carousel__button__next h-12 w-12 border-2 border-[#808080] rounded-full grid place-items-center hover:text-[#808080] transition-colors duration-300"
+                            className="carousel__button__next h-10 w-10 lg:h-12 lg:w-12 border-2 border-[#808080] rounded-full grid place-items-center"
                             disabled={isSliding}
+                            initial={{ opacity: 0, y: -100 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 2 }}
                         >
-                            <ChevronRight className="w-6 h-6" />
-                        </button>
+                            <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6" />
+                        </motion.button>
                     </div>
                 </div>
 
                 {/* Right Section - Carousel */}
                 <div className="lg:w-[70%]">
                     <div className="carousel carousel__fade relative h-full overflow-hidden">
-                        <div className="carousel__inner h-[calc(100vh-220px)] relative">
+                        <motion.div className="carousel__inner h-[calc(100vh-220px)] relative"
+                            initial={{ opacity: 0, x: 350 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 1 }}
+                        >
                             {properties.map((property, index) => (
                                 <div
                                     key={property.id}
@@ -144,14 +169,21 @@ const Hero = () => {
                                     />
                                 </div>
                             ))}
-                        </div>
+                        </motion.div>
 
                         <div className="h-[100px] bg-[#120d0d] px-8 flex items-center justify-between border-t border-[#2A2A2A]">
-                            <div className="text-[#454545] text-5xl font-bold tracking-wider uppercase">
+                            <motion.div className="text-[#454545] text-5xl font-bold tracking-wider uppercase"
+                                initial={{ opacity: 0, x: 350 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 1 }}>
                                 63+ works
-                            </div>
+                            </motion.div>
 
-                            <div className="flex items-center gap-8">
+                            <motion.div
+                                className="flex items-center gap-8"
+                                initial={{ opacity: 0, x: 350 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 2 }}>
                                 <h4 className={`text-white text-xl font-bold tracking-wider uppercase transition-all duration-500 ${textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                                     }`}>
                                     {displayedProperty.location}
@@ -166,11 +198,11 @@ const Hero = () => {
                                 </h4>
                                 <h4 className={`hidden xl:block border-b w-32 border-graycolor transition-all duration-500 delay-[300ms] ${textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                                     }`}></h4>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
 
             <style jsx>{`
                 @keyframes fadeIn {
@@ -202,9 +234,8 @@ const Hero = () => {
                     }
                 }
             `}</style>
-        </div>
+        </div >
     );
 }
 
 export default Hero
-

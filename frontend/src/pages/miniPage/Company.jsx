@@ -42,7 +42,7 @@ const Company = () => {
     return (
         <motion.section
             id="company"
-            className="bg-white py-20 md:py-28 relative overflow-hidden mt-3 md:p-36 sm:p-10"
+            className="bg-white py-20 md:py-28 relative overflow-hidden -mt-1 md:p-36 sm:p-10"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}

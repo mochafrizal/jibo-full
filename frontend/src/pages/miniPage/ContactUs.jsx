@@ -32,7 +32,7 @@ const Contact = () => {
     return (
         <section
             id="contact"
-            className="bg-white py-20 md:py-28 relative overflow-hidden mt-3"
+            className="bg-white py-20 md:py-28 relative overflow-hidden -mt-1"
             onMouseMove={handleMouseMove}
         >
             {/* Background Image */}

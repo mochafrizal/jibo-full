@@ -5,7 +5,7 @@ import Proces from './Proces'
 
 const About = () => {
     return (
-        <div className="bg-primary text-primary mx-auto mt-2">
+        <div className="bg-primary text-primary mx-auto -mt-1">
             <AboutAtas />
             <Proces />
         </div>
