@@ -1,6 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { LogOut, LayoutDashboard, Package, Users, UserPlus, FileText } from 'lucide-react';
+import { handleLogout } from '../../utility/handleLogout'
+import { useLogoutMutation } from '../../redux/features/auth/authApi';
 
 const AdminSidebar = () => {
     const navItems = [
@@ -10,6 +13,11 @@ const AdminSidebar = () => {
         { path: "/dashboard/manage-user", label: "Manage Users", icon: <Users size={20} /> },
         { path: "/dashboard/admin-register", label: "Register Admin", icon: <UserPlus size={20} /> },
     ];
+    const dispatch = useDispatch();
+    const [logoutMutation] = useLogoutMutation();
+    const LogoutClick = () => {
+        handleLogout(logoutMutation, dispatch);
+    };
 
     return (
         <div className="flex h-screen bg-white border-r">
@@ -50,7 +58,7 @@ const AdminSidebar = () => {
                 {/* Logout Section */}
                 <div className="pt-4 mt-4 border-t">
                     <button
-                        onClick={() => {/* Add your logout logic here */ }}
+                        onClick={LogoutClick}
                         className="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-red-600 rounded-lg hover:bg-red-50 transition-colors"
                     >
                         <LogOut size={20} />

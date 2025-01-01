@@ -88,7 +88,7 @@ const baseApi = createApi({
 
 export const {
     useLoginMutation,
-    useLogoutMutation, // Tambahkan hook untuk logout
+    useLogoutMutation,
     useGetAdminsQuery,
     useGetAdminQuery,
     useCreateAdminMutation,
