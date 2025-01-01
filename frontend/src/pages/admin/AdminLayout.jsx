@@ -17,7 +17,7 @@ const AdminLayout = () => {
             <header className="lg:w-1/5 sm:w-2/5 w-full">
                 <AdminNavigation />
             </header>
-            <main className="p-8 bg-white w-full">
+            <main className="w-full">
                 <Outlet />
             </main>
         </div>
