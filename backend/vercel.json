@@ -7,11 +7,10 @@
       "config": { "includeFiles": ["src/**"] }
     }
   ],
-
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "/src/app.js"
     }
   ]
 }
