@@ -58,7 +58,8 @@
 // // Menjalankan server
 // startServer();
 
-// vercel run
+// deploy vercel
+
 import express from 'express';
 import cors from 'cors';
 import adminRouter from './routes/adminRoutes.js';
@@ -83,39 +84,45 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Middleware CORS
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production'
-        ? ['https://jibo-full-backend.vercel.app', 'http://localhost:5173']
-        : 'http://localhost:5173',
-    credentials: true,
+    origin: '*',
+    credentials: true
 }));
 
-// Middleware parsing request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Menyambungkan rute
-app.use('/admin', adminRouter);
-app.use('/user', userRouter);
-app.use('/auth', loginRouter);
-app.use('/posts', postRouter);
-app.use('/product', productRouter);
-app.use('/logout', logoutRouter);
+app.use('/admin', adminRouter)
+app.use('/user', userRouter)
+app.use('/auth', loginRouter)
+app.use('/posts', postRouter)
+app.use('/product', productRouter)
 
-// Global error handler
-app.use(errorHandler);
-
-// Endpoint root untuk tes koneksi
-app.get('/', (req, res) => {
-    res.send('Server backend terhubung dengan frontend!');
-});
-
-// Connect to database dengan error handling
-try {
-    await connect();
-    console.log('Database connected successfully');
-} catch (error) {
-    console.error('Failed to connect to database:', error);
-}
+app.use(errorHandler)
 
 // Export untuk Vercel
-export default app;
+export default app
+
+// Server start hanya jika bukan di Vercel 
+if (process.env.NODE_ENV !== 'production') {
+    const startServer = async () => {
+        try {
+            await connect()
+            app.listen(port, () => {
+                console.log(`app listen on port: ${port}`);
+            })
+        } catch (error) {
+            console.log(`Gagal terhubung ke server: ${error.message}`);
+        }
+    }
+    startServer()
+}
+
+// Tambahkan health check endpoint
+app.get('/', (req, res) => {
+    res.json({ status: 'API is running' });
+});
+
+// Koneksi DB untuk environment production
+if (process.env.NODE_ENV === 'production') {
+    connect().catch(err => console.log('DB Connection Error:', err));
+}
