@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const baseApi = createApi({
     reducerPath: 'baseApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: import.meta.env.VITE_API_URL || "http://localhost:3000",
+        baseUrl: import.meta.env.VITE_API_URL || "https://jibo-full-backend.vercel.app/",
         credentials: 'include',
     }),
     endpoints: (builder) => ({

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'; // URL backend Anda
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://jibo-full-backend.vercel.app/';
 
 export const productApi = createApi({
     reducerPath: 'productApi',
