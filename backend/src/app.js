@@ -17,9 +17,7 @@
 // app.use('/uploads', express.static(path.join(path.resolve(), 'src/uploads')));
 // // Middleware CORS
 // app.use(cors({
-//     origin: process.env.NODE_ENV === 'production'
-//         ? ['https://jibo-full-backend.vercel.app/', 'http://localhost:5173']
-//         : 'http://localhost:5173',
+//     origin: 'http://localhost:5173', // URL frontend Anda
 //     credentials: true,
 // }));
 
@@ -58,6 +56,7 @@
 // // Menjalankan server
 // startServer();
 
+
 // deploy vercel
 
 import express from 'express';
@@ -84,8 +83,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Middleware CORS
 app.use(cors({
-    origin: '*',
-    credentials: true
+    origin: 'http://localhost:5173', // URL frontend Anda
+    credentials: true,
 }));
 
 app.use(express.json());
@@ -96,6 +95,7 @@ app.use('/user', userRouter)
 app.use('/auth', loginRouter)
 app.use('/posts', postRouter)
 app.use('/product', productRouter)
+app.use('/logout', logoutRouter);
 
 app.use(errorHandler)
 
