@@ -9,7 +9,7 @@ const Posts = () => {
     console.log(posts);
 
     const getImageUrl = (image) => {
-        return `http://localhost:3000/uploads/${image}`;
+        return `https://jibo-full-backend.vercel.app/${image}`;
     };
 
     const LoadingSkeleton = () => (

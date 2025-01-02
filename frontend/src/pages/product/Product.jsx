@@ -9,7 +9,7 @@ const Product = () => {
     const products = data?.products?.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) || [];
 
     const getImageUrl = (image) => {
-        return `http://localhost:3000/uploads/${image}`;
+        return `https://jibo-full-backend.vercel.app/${image}`;
     };
 
     const LoadingSkeleton = () => (

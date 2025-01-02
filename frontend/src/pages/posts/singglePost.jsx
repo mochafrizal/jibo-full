@@ -14,7 +14,7 @@ const SingglePost = () => {
         if (!image) return 'https://via.placeholder.com/1200x600?text=No+Image';
 
         try {
-            return `http://localhost:3000/uploads/${image}`;
+            return `https://jibo-full-backend.vercel.app/${image}`;
         } catch (err) {
             console.error('Error generating image URL:', err);
             return 'https://via.placeholder.com/1200x600?text=Error+Loading+Image';
